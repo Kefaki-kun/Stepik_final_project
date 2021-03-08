@@ -18,3 +18,8 @@ class ProductPageLocators():
     PRODUCT_PRICE_CART = (By.CSS_SELECTOR, ".alert-info p:first-child strong")
     PRODUCT_PRICE_STORE = (By.CSS_SELECTOR, "#content_inner p.price_color")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages div.alertinner")
+
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
