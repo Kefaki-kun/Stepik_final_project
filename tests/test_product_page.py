@@ -5,6 +5,7 @@ import pytest
 from .pages.product_page import ProductPage
 
 
+@pytest.mark.skip
 @pytest.mark.parametrize('promo_offer',
                          ["?promo=offer0", "?promo=offer1", "?promo=offer2", "?promo=offer3", "?promo=offer4",
                           "?promo=offer5", "?promo=offer6", pytest.param("?promo=offer7", marks=pytest.mark.xfail),
@@ -19,3 +20,30 @@ def test_guest_can_add_product_to_basket(browser, promo_offer):
     page.guest_can_see_product_name()
     time.sleep(2)
     page.product_price_is_correct()
+
+
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_cart()
+    page.solve_quiz_and_get_code()
+    time.sleep(2)
+    page.check_message_about_adding_to_cart()
+
+
+def test_guest_cant_see_success_message(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
+    page = ProductPage(browser, link)
+    page.open()
+    page.check_success_message_on_product_page()
+
+
+def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_cart()
+    page.solve_quiz_and_get_code()
+    time.sleep(2)
+    page.check_success_message_is_disappeared()
