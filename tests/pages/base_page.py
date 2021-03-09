@@ -58,3 +58,16 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_cart(self):
+        cart_button = self.browser.find_element(*BasePageLocators.CART_BUTTON)
+        cart_button.click()
+
+    def check_cart_empty(self):
+        assert self.is_not_element_present(*BasePageLocators.CART_ITEMS), \
+            "Product is displayed in the cart but should not be"
+
+    def check_empty_message_in_cart(self):
+        empty_cart_message = self.browser.find_element(*BasePageLocators.EMPTY_MESSAGE)
+        assert empty_cart_message and self.is_element_present(*BasePageLocators.EMPTY_MESSAGE), \
+            "Empty message is not displayed, but should be"
